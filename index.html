@@ -1,264 +1,360 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Modern Tek Sayfalık Site</title>
-  
-  <!-- Google Fonts (İsteğe bağlı ama çok yakışıyor) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Öz Adalı Hurdacılık | Kuşadası Aydın</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kuşadası'nın en güvenilir hurdacısı. Her türlü hurda alımı, kesim ve söküm hizmetleri. En iyi fiyat garantisi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  :root {
+    --primary: #00c853;
+    --dark: #0a0a0a;
+    --light: #f5f5f5;
+    --gray: #888;
+    --metal: #b0bec5;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--dark);
+    color: var(--light);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+    position: relative;
+  }
+  #three-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    opacity: 0.3;
+  }
+  a { text-decoration: none; color: inherit; }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  /* ===== LOADER ===== */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+  }
+  #loader.hidden { opacity: 0; pointer-events: none; }
+  .logo-text {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: var(--primary);
+    text-shadow: 0 0 40px rgba(0,200,83,0.4);
+    animation: glow 2.5s infinite alternate;
+  }
+  .sub-text { font-size: 1.4rem; color: var(--gray); margin-top: 12px; opacity: 0.9; letter-spacing: 2px; }
+  @keyframes glow { from { text-shadow: 0 0 20px rgba(0,200,83,0.3); } to { text-shadow: 0 0 60px rgba(0,200,83,0.7); } }
 
-    body {
-      background: #0a0a0a;
-      color: #e0e0e0;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+  /* ===== HEADER ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 24px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,10,0.75);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    transition: all 0.6s ease;
+  }
+  header.scrolled { padding: 16px 5%; background: rgba(10,10,10,0.92); }
+  .logo { font-size: 1.6rem; font-weight: 700; letter-spacing: 1px; cursor: pointer; }
+  nav a {
+    margin-left: 42px;
+    font-weight: 500;
+    transition: color 0.4s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 2px;
+    bottom: -6px; left: 0;
+    background: var(--primary);
+    transition: width 0.4s ease;
+  }
+  nav a:hover::after { width: 100%; }
+  nav a:hover { color: var(--primary); }
 
-    /* Header */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1.1rem 5%;
-      background: rgba(10,10,10,0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      z-index: 1000;
-      transition: all 0.4s ease;
-    }
+  /* ===== HERO ===== */
+  .hero {
+    height: 100vh;
+    min-height: 800px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.45) contrast(1.15);
+    z-index: -2;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    z-index: -1;
+  }
+  .hero-content {
+    max-width: 1100px;
+    padding: 0 5%;
+    transform: translateZ(0);
+  }
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7.2rem);
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    opacity: 0;
+  }
+  .hero p {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--gray);
+    max-width: 780px;
+    margin: 0 auto 48px;
+    opacity: 0;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 18px 48px;
+    background: var(--primary);
+    color: #000;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 12px 40px rgba(0,200,83,0.4);
+    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  .cta-btn:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 24px 60px rgba(0,200,83,0.55);
+  }
 
-    header.scrolled {
-      padding: 0.8rem 5%;
-      background: rgba(10,10,10,0.96);
-    }
+  /* ===== SECTIONS ===== */
+  section { padding: 140px 5%; max-width: 1400px; margin: auto; }
+  h2 {
+    font-size: 3.8rem;
+    text-align: center;
+    margin-bottom: 80px;
+    background: linear-gradient(90deg, #fff, var(--primary), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
-    }
+  /* ===== GALLERY ===== */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 32px;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .gallery-item:hover img { transform: scale(1.14); }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  /* ===== WHATSAPP ===== */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 74px;
+    height: 74px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.6rem;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    z-index: 1000;
+    transition: all 0.4s;
+  }
+  .whatsapp-float:hover { transform: scale(1.15) rotate(8deg); }
 
-    .logo {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: white;
-    }
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 60px 5% 100px;
+    color: var(--gray);
+    font-size: 0.95rem;
+    border-top: 1px solid #222;
+  }
+  .drakos { color: var(--primary); font-weight: 600; margin-top: 12px; font-size: 1.1rem; cursor: pointer; }
 
-    .logo span { color: #00ff88; }
-
-    nav a {
-      color: #ccc;
-      text-decoration: none;
-      margin-left: 2.4rem;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav a:hover { color: white; }
-
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: linear-gradient(135deg, #111 0%, #000 100%);
-      position: relative;
-    }
-
-    .hero h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 900;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, #fff, #00ff88, #fff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      line-height: 0.95;
-    }
-
-    .hero p {
-      font-size: 1.4rem;
-      max-width: 720px;
-      color: #aaa;
-      margin-bottom: 2.5rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 1.1rem 2.6rem;
-      background: #00ff88;
-      color: black;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 50px;
-      transition: all 0.35s ease;
-      box-shadow: 0 10px 30px rgba(0,255,136,0.3);
-    }
-
-    .btn:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,255,136,0.45);
-      background: #00e077;
-    }
-
-    /* WhatsApp FAB */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 999;
-    }
-
-    .whatsapp-float a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 70px;
-      height: 70px;
-      background: #25D366;
-      color: white;
-      font-size: 2.4rem;
-      border-radius: 50%;
-      box-shadow: 0 12px 30px rgba(37,211,102,0.45);
-      transition: all 0.4s ease;
-      text-decoration: none;
-    }
-
-    .whatsapp-float a:hover {
-      transform: scale(1.15) translateY(-6px);
-      box-shadow: 0 20px 50px rgba(37,211,102,0.6);
-    }
-
-    /* Sections */
-    section {
-      padding: 10rem 0 8rem;
-    }
-
-    .section-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 4rem;
-      background: linear-gradient(90deg, #fff, #aaa, #fff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-
-    .gallery-item {
-      aspect-ratio: 4/3;
-      background: #111;
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-14px);
-      box-shadow: 0 20px 50px rgba(0,255,136,0.2);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.09);
-    }
-
-    footer {
-      padding: 5rem 0 3rem;
-      text-align: center;
-      background: #000;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      color: #666;
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 3.8rem; }
-      nav a { margin-left: 1.4rem; font-size: 0.95rem; }
-      section { padding: 7rem 0 5rem; }
-    }
-  </style>
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 4.2rem; }
+    .hero p { font-size: 1.4rem; }
+    nav a { margin-left: 24px; font-size: 0.95rem; }
+  }
+</style>
 </head>
 <body>
+<canvas id="three-canvas"></canvas>
 
-  <header id="header">
-    <div class="container">
-      <nav>
-        <div class="logo">Marka<span>Adı</span></div>
-        <div>
-          <a href="#anasayfa">Anasayfa</a>
-          <a href="#hakkinda">Hakkında</a>
-          <a href="#galeri">Galeri</a>
-          <a href="#iletisim">İletişim</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<!-- LOADER -->
+<div id="loader">
+  <div class="logo-text">ÖZ ADALI</div>
+  <div class="sub-text">HURDACILIK • KUŞADASI</div>
+</div>
 
-  <section class="hero" id="anasayfa">
-    <h1>Hoş Geldiniz</h1>
-    <p>Modern, şık ve hızlı bir tek sayfalık web sitesi. Sadece bir dosyayla her şey burada!</p>
-    <a href="https://wa.me/905xxxxxxxxx?text=Merhaba%20detaylı%20bilgi%20alabilir%20miyim?" class="btn">WhatsApp ile Başla</a>
-  </section>
+<header id="header">
+  <a href="index.html" class="logo">Öz Adalı Hurdacılık</a>
+  <nav>
+    <a href="#hakkimizda">Hakkımızda</a>
+    <a href="#galeri">Galeri</a>
+    <a href="islerimiz.html">İşlerimiz</a>
+    <a href="tel:05366850647">İletişim</a>
+  </nav>
+</header>
 
-  <section id="galeri">
-    <h2 class="section-title">Galeri</h2>
-    <div class="container">
-      <div class="gallery">
-        <!-- Gerçek projende kendi fotoğraflarını koyabilirsin -->
-        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=800" alt="1"></div>
-        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1557683311-973673bafdfd?w=800" alt="2"></div>
-        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1557683304-673a25a41bdf?w=800" alt="3"></div>
-        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1557682257-2f9c97a0d2e8?w=800" alt="4"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WhatsApp Sabit Buton -->
-  <div class="whatsapp-float">
-    <a href="https://wa.me/905xxxxxxxxx?text=Merhaba!%20Size%20nasıl%20yardımcı%20olabilirim?" target="_blank">💬</a>
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/video.mp4" type="video/mp4">
+    <!-- Alternatif: https://assets.mixkit.co/videos/preview/mixkit-heavy-machinery-moving-scrap-metal-141-large.mp4 -->
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Öz Adalı Hurdacılık</h1>
+    <p>Endüstriyel kalitede hurda alımı • Profesyonel kesim & söküm • En rekabetçi fiyatlar</p>
+    <a href="tel:05366850647" class="cta-btn">📞 HEMEN FİYAT AL</a>
   </div>
+</section>
 
-  <footer>
-    <p>© 2026 Tüm hakları saklıdır • Tek dosya mucizesi</p>
-  </footer>
+<section id="hakkimizda">
+  <h2>Hakkımızda</h2>
+  <p style="font-size:1.4rem; max-width:880px; margin:auto; text-align:center; color:#ccc;">
+    Kuşadası ve Aydın bölgesinin lider hurdacılık firması olarak, yılların verdiği tecrübeyle her türlü metal, demir, bakır, alüminyum ve araç hurdalarınızı en yüksek değerde nakit olarak alıyoruz. 
+    Profesyonel ekip ve modern ekipmanlarla hızlı, güvenli ve çevre dostu hizmet sunuyoruz.
+  </p>
+</section>
 
-  <script>
-    // Header scroll efekti
-    window.addEventListener('scroll', () => {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 80);
-    });
-  </script>
+<section id="galeri">
+  <h2>Fotoğraf Galerisi</h2>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg" alt="Hurda Alımı"></div>
+    <div class="gallery-item"><img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg" alt="Kesim ve Söküm"></div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Öz Adalı Hurdacılık • Tüm hakları saklıdır.<br>
+  <a href="https://adoniscodee.github.io/drakosyazlm/" class="drakos">Designed & Developed by Drakos Software</a>
+</footer>
+
+<a href="https://wa.me/905366850647?text=Merhaba%2C%20hurda%20satmak%20istiyorum%2C%20bilgi%20alabilir%20miyim%3F" class="whatsapp-float" target="_blank">💬</a>
+
+<script>
+// 3D Arka Plan (Three.js ile hareketli metal parçacıkları)
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const particles = new THREE.BufferGeometry();
+const particleCount = 5000;
+const posArray = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount * 3; i++) {
+  posArray[i] = (Math.random() - 0.5) * 10;
+}
+particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+const material = new THREE.PointsMaterial({
+  color: 0x00c853,
+  size: 0.01,
+  blending: THREE.AdditiveBlending,
+  transparent: true
+});
+const particleSystem = new THREE.Points(particles, material);
+scene.add(particleSystem);
+
+camera.position.z = 5;
+
+function animate() {
+  requestAnimationFrame(animate);
+  particleSystem.rotation.y += 0.0005;
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Loader
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  setTimeout(() => loader.classList.add("hidden"), 800);
+});
+
+// Header scroll
+window.addEventListener("scroll", () => {
+  document.getElementById("header").classList.toggle("scrolled", window.scrollY > 100);
+});
+
+// Hero mouse efekt
+const heroContent = document.querySelector(".hero-content");
+document.querySelector(".hero").addEventListener("mousemove", e => {
+  const x = (window.innerWidth / 2 - e.clientX) / 35;
+  const y = (window.innerHeight / 2 - e.clientY) / 35;
+  heroContent.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+document.querySelector(".hero").addEventListener("mouseleave", () => {
+  heroContent.style.transform = "rotateY(0deg) rotateX(0deg)";
+});
+
+// Scroll animasyon
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll("h1, .hero p, .cta-btn, h2, .gallery-item").forEach(el => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(60px)";
+  el.style.transition = "all 1.2s cubic-bezier(0.16,1,0.3,1)";
+  observer.observe(el);
+});
+</script>
 </body>
 </html>
