@@ -6,143 +6,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',Arial,sans-serif;
-}
-
-body{
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-}
-
-/* LOADER */
-#loader{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:5000;
-  animation:fadeOut 1s ease forwards;
-  animation-delay:2.5s;
-}
-
-.loader-content{
-  text-align:center;
-  animation:zoomIn 2s ease;
-}
-
-.loader-content h1{
-  font-size:38px;
-  margin-top:20px;
-  letter-spacing:2px;
-}
-
-@keyframes zoomIn{
-  from{opacity:0; transform:scale(.6)}
-  to{opacity:1; transform:scale(1)}
-}
-
-@keyframes fadeOut{
-  to{opacity:0; visibility:hidden}
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+body{background:#000;color:#fff}
 
 /* HEADER */
 header{
-  position:sticky;
-  top:0;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(10px);
+  position:sticky;top:0;
+  background:rgba(0,0,0,.8);
+  padding:18px 30px;
   display:flex;
   justify-content:space-between;
-  padding:18px 30px;
-  z-index:1000;
 }
-
-nav a{
-  color:#fff;
-  margin-left:20px;
-  text-decoration:none;
-  font-weight:600;
-}
+nav a{color:#fff;margin-left:20px;text-decoration:none}
 
 /* HERO */
 .hero{
   height:100vh;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   text-align:center;
   background:
-    linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.85)),
-    url("https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg")
-    no-repeat center/cover;
-  perspective:1200px;
+  linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.9)),
+  url("https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg")
+  center/cover no-repeat;
 }
-
-.hero-inner{
-  transform-style:preserve-3d;
-  transition:.1s;
-}
-
-.hero h1{
-  font-size:42px;
-  margin-bottom:12px;
-  text-shadow:0 20px 40px rgba(0,0,0,.8);
-}
-
-.hero p{
-  color:#ccc;
-  margin-bottom:30px;
-}
-
 .hero a{
   display:inline-block;
-  padding:16px 36px;
-  border-radius:50px;
-  background:linear-gradient(135deg,#2ecc71,#27ae60);
+  margin-top:25px;
+  padding:15px 35px;
+  background:#2ecc71;
   color:#000;
+  border-radius:40px;
   text-decoration:none;
   font-weight:bold;
-  box-shadow:0 20px 40px rgba(0,0,0,.7);
 }
 
-/* SECTIONS */
-.section{
-  max-width:1200px;
-  margin:auto;
-  padding:80px 20px;
-}
-
-.glass{
-  background:rgba(255,255,255,.05);
-  border-radius:20px;
-  padding:40px;
-  backdrop-filter:blur(12px);
-  box-shadow:0 30px 60px rgba(0,0,0,.8);
-}
+/* SECTION */
+.section{max-width:1200px;margin:auto;padding:80px 20px}
 
 /* GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-  perspective:1200px;
+  gap:25px;
 }
-
 .gallery img{
   width:100%;
   height:260px;
   object-fit:cover;
-  border-radius:18px;
-  transition:.15s;
-  box-shadow:0 30px 60px rgba(0,0,0,.7);
+  border-radius:15px;
+  cursor:pointer;
 }
 
 /* LIGHTBOX */
@@ -151,51 +65,45 @@ nav a{
   inset:0;
   background:rgba(0,0,0,.9);
   display:none;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   z-index:3000;
 }
+.lightbox img{max-width:90%;max-height:90%}
 
-.lightbox img{
-  max-width:90%;
-  max-height:90%;
-}
-
-/* FOOTER */
-footer{
-  background:#000;
-  text-align:center;
-  padding:25px;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .hero h1{font-size:28px}
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  width:60px;
+  height:60px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:#fff;
+  text-decoration:none;
+  z-index:4000;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-content">
-    <h1>ÖZ ADALI HURDACILIK</h1>
-    <p>Kuşadası / Aydın</p>
-  </div>
-</div>
-
 <header>
   <strong>Öz Adalı Hurdacılık</strong>
   <nav>
     <a href="#about">Hakkımızda</a>
+    <a href="islerimiz.html">Yaptığımız İşler</a>
     <a href="#gallery">Galeri</a>
-    <a href="#contact">İletişim</a>
   </nav>
 </header>
 
-<section class="hero" id="hero">
-  <div class="hero-inner" id="heroInner">
+<section class="hero">
+  <div>
     <h1>Aydın Kuşadası Öz Adalı Hurdacılık</h1>
     <p>Her türlü hurdanız alınır • Kesim & Söküm</p>
     <a href="tel:05366850647">📞 Hemen Ara</a>
@@ -203,56 +111,38 @@ footer{
 </section>
 
 <section id="about" class="section">
-  <div class="glass">
-    <h2>Hakkımızda</h2>
-    <p>Kuşadası ve çevresinde profesyonel hurdacılık hizmeti.</p>
-  </div>
+  <h2>Hakkımızda</h2>
+  <p>Kuşadası ve çevresinde profesyonel hurdacılık hizmeti.</p>
 </section>
 
 <section id="gallery" class="section">
-  <h2>Fotoğraf Galerisi</h2>
+  <h2>Foto Galeri</h2>
   <div class="gallery">
     <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg">
     <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg">
   </div>
 </section>
 
-<footer>
-  © Öz Adalı Hurdacılık
-</footer>
+<footer class="section">© Öz Adalı Hurdacılık</footer>
 
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
   <img id="lightbox-img">
 </div>
 
+<!-- WHATSAPP -->
+<a class="whatsapp"
+href="https://wa.me/905366850647?text=Merhaba%20hurda%20satmak%20istiyorum"
+target="_blank">💬</a>
+
 <script>
-/* HERO 3D MOUSE */
-const hero = document.getElementById("hero");
-const inner = document.getElementById("heroInner");
-
-hero.addEventListener("mousemove", e=>{
-  const x = (window.innerWidth/2 - e.clientX)/25;
-  const y = (window.innerHeight/2 - e.clientY)/25;
-  inner.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-});
-
-hero.addEventListener("mouseleave", ()=>{
-  inner.style.transform = "rotateY(0) rotateX(0)";
-});
-
-/* GALLERY 3D */
+const lb=document.getElementById("lightbox");
+const lbImg=document.getElementById("lightbox-img");
 document.querySelectorAll(".gallery img").forEach(img=>{
-  img.addEventListener("mousemove", e=>{
-    const rect = img.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rx = -(y - rect.height/2)/20;
-    const ry = (x - rect.width/2)/20;
-    img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.08)`;
-  });
-  img.addEventListener("mouseleave", ()=>{
-    img.style.transform = "rotateX(0) rotateY(0) scale(1)";
-  });
+  img.onclick=()=>{
+    lb.style.display="flex";
+    lbImg.src=img.src;
+  }
 });
 </script>
 
