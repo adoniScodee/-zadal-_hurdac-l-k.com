@@ -4,285 +4,309 @@
 <meta charset="UTF-8">
 <title>Öz Adalı Hurdacılık | Kuşadası Aydın</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="description" content="Kuşadası'nın en güvenilir hurdacısı. Her türlü hurda alımı, kesim ve söküm hizmetleri. En iyi fiyat garantisi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===== GENEL ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
-body{background:#000;color:#fff;overflow-x:hidden;opacity:0;transition:opacity 1.2s ease}
-a{text-decoration:none;color:inherit}
-section{position:relative}
+  :root {
+    --primary: #00c853;
+    --dark: #0a0a0a;
+    --light: #f5f5f5;
+    --gray: #888;
+    --metal: #b0bec5;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--dark);
+    color: var(--light);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
 
-/* ===== LOADER ===== */
-#loader{
-  position:fixed;inset:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  flex-direction:column;
-}
-#loader h1{
-  color:#2ecc71;
-  font-size:48px;
-  margin-bottom:10px;
-  letter-spacing:2px;
-  animation:logoPop 1.5s ease forwards;
-}
-#loader p{
-  color:#ccc;
-  font-size:20px;
-  animation:logoPop 1.5s ease 0.5s forwards;
-}
+  /* ===== LOADER - Hızlı ve Şık ===== */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+  }
+  #loader.hidden { opacity: 0; pointer-events: none; }
+  .logo-text {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: var(--primary);
+    text-shadow: 0 0 40px rgba(0,200,83,0.4);
+    animation: glow 2.5s infinite alternate;
+  }
+  .sub-text { font-size: 1.4rem; color: var(--gray); margin-top: 12px; opacity: 0.9; letter-spacing: 2px; }
+  @keyframes glow { from { text-shadow: 0 0 20px rgba(0,200,83,0.3); } to { text-shadow: 0 0 60px rgba(0,200,83,0.7); } }
 
-@keyframes logoPop{
-  from{opacity:0; transform:scale(.6)}
-  to{opacity:1; transform:scale(1)}
-}
+  /* ===== HEADER ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 24px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,10,0.75);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    transition: all 0.6s ease;
+  }
+  header.scrolled { padding: 16px 5%; background: rgba(10,10,10,0.92); }
+  .logo { font-size: 1.6rem; font-weight: 700; letter-spacing: 1px; }
+  nav a {
+    margin-left: 42px;
+    font-weight: 500;
+    transition: color 0.4s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 2px;
+    bottom: -6px; left: 0;
+    background: var(--primary);
+    transition: width 0.4s ease;
+  }
+  nav a:hover::after { width: 100%; }
+  nav a:hover { color: var(--primary); }
 
-/* ===== HEADER ===== */
-header{
-  position:sticky;top:0;
-  background:rgba(0,0,0,.85);
-  padding:18px 30px;
-  display:flex;
-  justify-content:space-between;
-  z-index:1000;
-  transform:translateY(-60px);
-  opacity:0;
-  animation:headerDrop 1s ease forwards;
-  animation-delay:2s;
-}
-nav a{color:#fff;margin-left:20px;font-weight:600;transition:.3s}
-nav a:hover{color:#2ecc71}
+  /* ===== HERO - Apple/Roles tarzı premium ===== */
+  .hero {
+    height: 100vh;
+    min-height: 800px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.45) contrast(1.15);
+    z-index: -2;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    z-index: -1;
+  }
+  .hero-content {
+    max-width: 1100px;
+    padding: 0 5%;
+    transform: translateZ(0);
+  }
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7.2rem);
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    opacity: 0;
+  }
+  .hero p {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--gray);
+    max-width: 780px;
+    margin: 0 auto 48px;
+    opacity: 0;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 18px 48px;
+    background: var(--primary);
+    color: #000;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 12px 40px rgba(0,200,83,0.4);
+    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  .cta-btn:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 24px 60px rgba(0,200,83,0.55);
+  }
 
-@keyframes headerDrop{
-  from{opacity:0; transform:translateY(-60px)}
-  to{opacity:1; transform:translateY(0)}
-}
+  /* ===== SECTIONS ===== */
+  section { padding: 140px 5%; max-width: 1400px; margin: auto; }
+  h2 {
+    font-size: 3.8rem;
+    text-align: center;
+    margin-bottom: 80px;
+    background: linear-gradient(90deg, #fff, var(--primary), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-/* ===== HERO ===== */
-.hero{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  overflow:hidden;
-  perspective:1200px;
-}
-.hero video{
-  position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;
-  filter:brightness(0.5);
-}
-.hero-inner{
-  transform-style:preserve-3d;
-}
-.hero h1{
-  font-size:48px;
-  margin-bottom:15px;
-  color:#fff;
-  opacity:0;
-  transform:translateZ(-200px) scale(.8);
-  animation:heroTitle 1.5s ease forwards;
-  animation-delay:2.5s;
-  text-shadow:0 20px 40px rgba(0,0,0,.8);
-}
-.hero p{
-  color:#ccc;
-  font-size:22px;
-  margin-bottom:30px;
-  opacity:0;
-  transform:translateY(30px);
-  animation:heroText 1.5s ease forwards;
-  animation-delay:3s;
-}
-.hero a{
-  display:inline-block;
-  padding:16px 40px;
-  border-radius:50px;
-  background:#2ecc71;
-  color:#000;
-  font-weight:bold;
-  box-shadow:0 20px 40px rgba(0,0,0,.7);
-  opacity:0;
-  transform:translateY(40px);
-  animation:heroBtn 1.5s ease forwards;
-  animation-delay:3.5s;
-}
+  /* ===== GALLERY ===== */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 32px;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .gallery-item:hover img { transform: scale(1.14); }
 
-@keyframes heroTitle{
-  from{opacity:0; transform:translateZ(-200px) scale(.8)}
-  to{opacity:1; transform:translateZ(0) scale(1)}
-}
-@keyframes heroText{
-  from{opacity:0; transform:translateY(30px)}
-  to{opacity:1; transform:translateY(0)}
-}
-@keyframes heroBtn{
-  from{opacity:0; transform:translateY(40px)}
-  to{opacity:1; transform:translateY(0)}
-}
+  /* ===== WHATSAPP FAB ===== */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 74px;
+    height: 74px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.6rem;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    z-index: 1000;
+    transition: all 0.4s;
+  }
+  .whatsapp-float:hover { transform: scale(1.15) rotate(8deg); }
 
-/* ===== SECTION ===== */
-.section{
-  max-width:1200px;
-  margin:auto;
-  padding:80px 20px;
-  opacity:0;
-  transform:translateY(60px);
-  transition:opacity 1s ease, transform 1s ease;
-}
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 60px 5% 100px;
+    color: var(--gray);
+    font-size: 0.95rem;
+    border-top: 1px solid #222;
+  }
+  .drakos { color: var(--primary); font-weight: 600; margin-top: 12px; font-size: 1.1rem; }
 
-/* ===== GALLERY ===== */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-  perspective:1200px;
-}
-.gallery img{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  border-radius:15px;
-  cursor:pointer;
-  transition:transform .4s ease, box-shadow .4s ease;
-}
-.gallery img:hover{
-  transform:scale(1.08) rotateX(6deg) rotateY(-6deg);
-  box-shadow:0 30px 70px rgba(0,0,0,.9);
-}
-
-/* ===== LIGHTBOX ===== */
-.lightbox{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.95);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:5000;
-}
-.lightbox img{max-width:90%;max-height:90%;}
-
-/* ===== WHATSAPP ===== */
-.whatsapp{
-  position:fixed;
-  right:25px;
-  bottom:25px;
-  width:60px;
-  height:60px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  color:#fff;
-  text-decoration:none;
-  z-index:4000;
-  transition:.3s;
-}
-.whatsapp:hover{transform:scale(1.1)}
-
-/* ===== SCROLL ANİMASYONU ===== */
-html{scroll-behavior:smooth}
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 4.2rem; }
+    .hero p { font-size: 1.4rem; }
+    nav a { margin-left: 24px; font-size: 0.95rem; }
+  }
 </style>
 </head>
-
 <body>
 
 <!-- LOADER -->
 <div id="loader">
-  <h1>ÖZ ADALI HURDACILIK</h1>
-  <p>Kuşadası / Aydın</p>
+  <div class="logo-text">ÖZ ADALI</div>
+  <div class="sub-text">HURDACILIK • KUŞADASI</div>
 </div>
 
-<header>
-  <strong>Öz Adalı Hurdacılık</strong>
+<header id="header">
+  <div class="logo">Öz Adalı Hurdacılık</div>
   <nav>
-    <a href="#about">Hakkımızda</a>
-    <a href="#gallery">Galeri</a>
-    <a href="#contact">İletişim</a>
+    <a href="#hakkimizda">Hakkımızda</a>
+    <a href="#galeri">Galeri</a>
+    <a href="tel:05366850647">İletişim</a>
   </nav>
 </header>
 
 <section class="hero">
-  <video autoplay muted loop playsinline>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <!-- Önerilen sinematik hurda video linkleri (ücretsiz stock bulabilirsin) -->
     <source src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/video.mp4" type="video/mp4">
+    <!-- Alternatif premium his için: https://assets.mixkit.co/videos/preview/mixkit-heavy-machinery-moving-scrap-metal-141-large.mp4 -->
   </video>
-  <div class="hero-inner">
-    <h1>Aydın Kuşadası Öz Adalı Hurdacılık</h1>
-    <p>Her türlü hurdanız alınır • Kesim & Söküm</p>
-    <a href="tel:05366850647">📞 Hemen Ara</a>
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content">
+    <h1>Öz Adalı Hurdacılık</h1>
+    <p>Endüstriyel kalitede hurda alımı • Profesyonel kesim & söküm • En rekabetçi fiyatlar</p>
+    <a href="tel:05366850647" class="cta-btn">📞 HEMEN FİYAT AL</a>
   </div>
 </section>
 
-<section id="about" class="section">
+<section id="hakkimizda">
   <h2>Hakkımızda</h2>
-  <p>Kuşadası ve çevresinde profesyonel hurdacılık hizmeti.</p>
+  <p style="font-size:1.4rem; max-width:880px; margin:auto; text-align:center; color:#ccc;">
+    Kuşadası ve Aydın bölgesinin lider hurdacılık firması olarak, yılların verdiği tecrübeyle her türlü metal, demir, bakır, alüminyum ve araç hurdalarınızı en yüksek değerde nakit olarak alıyoruz. 
+    Profesyonel ekip ve modern ekipmanlarla hızlı, güvenli ve çevre dostu hizmet sunuyoruz.
+  </p>
 </section>
 
-<section id="gallery" class="section">
-  <h2>Foto Galeri</h2>
+<section id="galeri">
+  <h2>Fotoğraf Galerisi</h2>
   <div class="gallery">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg">
+    <div class="gallery-item"><img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg" alt="Hurda Alımı"></div>
+    <div class="gallery-item"><img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg" alt="Kesim ve Söküm"></div>
+    <!-- İstersen buraya 2-4 foto daha ekleyebilirsin -->
   </div>
 </section>
 
-<footer class="section">© Öz Adalı Hurdacılık</footer>
+<footer>
+  © 2026 Öz Adalı Hurdacılık • Tüm hakları saklıdır.<br>
+  <div class="drakos">Designed & Developed by Drakos Software</div>
+</footer>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
-  <img id="lightbox-img">
-</div>
-
-<!-- WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/905366850647?text=Merhaba%20hurda%20satmak%20istiyorum" target="_blank">💬</a>
+<a href="https://wa.me/905366850647?text=Merhaba%2C%20hurda%20satmak%20istiyorum%2C%20bilgi%20alabilir%20miyim%3F" class="whatsapp-float" target="_blank">💬</a>
 
 <script>
-/* ===== YÜKLENİYOR ANİMASYONU ===== */
-window.addEventListener("load", ()=>{
+// Loader hızlı kapansın
+window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
-  loader.style.opacity="0";
-  setTimeout(()=>loader.style.display="none",800);
-  document.body.style.opacity="1";
-
-  // Scroll animasyon
-  const sections = document.querySelectorAll(".section");
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.style.opacity="1";
-        entry.target.style.transform="translateY(0)";
-      }
-    });
-  },{threshold:0.2});
-  sections.forEach(sec=>observer.observe(sec));
+  setTimeout(() => loader.classList.add("hidden"), 800);
 });
 
-/* ===== HERO MOUSE 3D ===== */
-const heroInner = document.querySelector(".hero-inner");
-document.querySelector(".hero").addEventListener("mousemove", e=>{
-  const x = (window.innerWidth/2 - e.clientX)/25;
-  const y = (window.innerHeight/2 - e.clientY)/25;
-  heroInner.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-});
-document.querySelector(".hero").addEventListener("mouseleave", ()=>{
-  heroInner.style.transform = "rotateY(0) rotateX(0)";
+// Header scroll efekti
+window.addEventListener("scroll", () => {
+  document.getElementById("header").classList.toggle("scrolled", window.scrollY > 100);
 });
 
-/* ===== GALLERY LIGHTBOX ===== */
-const lb=document.getElementById("lightbox");
-const lbImg=document.getElementById("lightbox-img");
-document.querySelectorAll(".gallery img").forEach(img=>{
-  img.onclick=()=>{
-    lb.style.display="flex";
-    lbImg.src=img.src;
-  };
+// Hero parallax mouse efekti (lüks his için)
+const heroContent = document.querySelector(".hero-content");
+document.querySelector(".hero").addEventListener("mousemove", e => {
+  const { clientX, clientY } = e;
+  const x = (window.innerWidth / 2 - clientX) / 35;
+  const y = (window.innerHeight / 2 - clientY) / 35;
+  heroContent.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+document.querySelector(".hero").addEventListener("mouseleave", () => {
+  heroContent.style.transform = "rotateY(0deg) rotateX(0deg)";
+});
+
+// Animasyonlar (scroll ile fade-in)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll("h1, .hero p, .cta-btn, h2, .gallery-item").forEach(el => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(60px)";
+  el.style.transition = "all 1.2s cubic-bezier(0.16,1,0.3,1)";
+  observer.observe(el);
 });
 </script>
-
 </body>
 </html>
