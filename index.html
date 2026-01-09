@@ -1,70 +1,151 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Öz Adalı Hurdacılık | Kuşadası Aydın</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aydın Kuşadası Öz Adalı Hurdacılık - Her türlü hurdanız alınır. Kesim ve söküm işleri itina ile yapılır.">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Öz Adalı Hurdacılık | Kuşadası Aydın</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aydın Kuşadası Öz Adalı Hurdacılık - Her türlü hurdanız alınır. Kesim ve söküm işleri yapılır.">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#0c0c0c;color:#fff}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  background:#000;
+  position:sticky;
+  top:0;
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:bold;
+}
+nav a:hover{color:#2ecc71}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:90px 20px;
+  background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+  url("https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg")
+  center/cover;
+}
+.hero h1{font-size:36px;margin-bottom:10px}
+.hero p{font-size:18px;color:#ccc}
+
+/* SECTIONS */
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:60px 20px;
+}
+.section h2{
+  border-left:5px solid #2ecc71;
+  padding-left:10px;
+  margin-bottom:20px;
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+.gallery img{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+  border-radius:12px;
+  transition:.3s;
+}
+.gallery img:hover{transform:scale(1.05)}
+
+/* MAP */
+iframe{
+  width:100%;
+  height:320px;
+  border:0;
+  border-radius:12px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#25D366;
+  color:#fff;
+  padding:15px 22px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  background:#000;
+  padding:20px;
+  font-size:14px;
+}
+</style>
 </head>
+
 <body>
+
 <header>
-    <div class="logo">
-        <img src="logo-placeholder.png" alt="Öz Adalı Hurdacılık Logo">
-        <h1>Öz Adalı Hurdacılık</h1>
-    </div>
-    <nav>
-        <a href="#about">Hakkımızda</a>
-        <a href="#gallery">Galeri</a>
-        <a href="#contact">İletişim</a>
-    </nav>
+  <strong>Öz Adalı Hurdacılık</strong>
+  <nav>
+    <a href="#about">Hakkımızda</a>
+    <a href="#gallery">Galeri</a>
+    <a href="#contact">İletişim</a>
+  </nav>
 </header>
 
 <section class="hero">
-    <h2>Aydın Kuşadası Öz Adalı Hurdacılık</h2>
-    <p>Her türlü hurdanız alınır<br>
-    Kesim ve söküm işleri itina ile yapılır</p>
-    <span class="badges">Güvenilir • Profesyonel • Hızlı</span>
+  <h1>Aydın Kuşadası Öz Adalı Hurdacılık</h1>
+  <p>Her türlü hurdanız alınır<br>Kesim & söküm işleri itina ile yapılır</p>
 </section>
 
 <section id="about" class="section">
-    <h3>Hakkımızda</h3>
-    <p>
-        Aydın Kuşadası Öz Adalı Hurdacılık olarak yıllardır hurdacılık sektöründe güvenilir,
-        profesyonel ve hızlı hizmet sunuyoruz. Her türlü metal hurdası alımı,
-        bina ve tesislerde kesim & söküm işleri itina ile yapılmaktadır.
-    </p>
+  <h2>Hakkımızda</h2>
+  <p>
+    Öz Adalı Hurdacılık olarak Kuşadası ve çevresinde
+    yıllardır güvenilir ve hızlı hurdacılık hizmeti sunuyoruz.
+    Her türlü metal hurdası alımı ve söküm işleri profesyonelce yapılır.
+  </p>
 </section>
 
 <section id="gallery" class="section">
-    <h3>Fotoğraf Galerisi</h3>
-    <div class="gallery">
-        <div class="photo"><img src="https://raw.githubusercontent.com/kullaniciadi/repo-adi/main/resim.jpeg">
-</div>
-        <div class="photo">Fotoğraf Ekle</div>
-        <div class="photo">Fotoğraf Ekle</div>
-    </div>
+  <h2>Fotoğraf Galerisi</h2>
+  <div class="gallery">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/IMG-20250324-WA0003.jpg">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/IMG-20250428-WA0013.jpg">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg">
+  </div>
 </section>
 
 <section id="contact" class="section">
-    <h3>İletişim</h3>
-    <p>📞 <strong>0 536 685 06 47</strong></p>
-    <div class="map">
-        <iframe 
-            src="https://www.google.com/maps?q=Değirmendere%20Mah.%20Sanayi%20Cad.%2020%20Sk.%20No:3%20Kuşadası%20Aydın&output=embed"
-            loading="lazy"></iframe>
-    </div>
+  <h2>İletişim</h2>
+  <p>📞 <strong>0 536 685 06 47</strong></p>
+  <iframe src="https://www.google.com/maps?q=Değirmendere%20Mah.%20Sanayi%20Cad.%2020%20Sk.%20No:3%20Kuşadası%20Aydın&output=embed"></iframe>
 </section>
 
-<a class="whatsapp-button" href="https://wa.me/905366850647" target="_blank">
-    WhatsApp ile İletişime Geç
+<a class="whatsapp" href="https://wa.me/905366850647" target="_blank">
+  WhatsApp
 </a>
 
 <footer>
-    <p>📍 Değirmendere Mah. Sanayi Cad. 20 Sk. No:3 Kuşadası / Aydın</p>
-    <small>Drakos Software ile tasarlanmıştır</small>
+  📍 Değirmendere Mah. Sanayi Cad. 20 Sk. No:3 Kuşadası / Aydın<br>
+  <small>Drakos Software</small>
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
