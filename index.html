@@ -6,50 +6,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* ===== GENEL ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
-body{background:#000;color:#fff}
+body{background:#000;color:#fff;overflow-x:hidden;opacity:0;transition:opacity 1.2s ease}
+a{text-decoration:none;color:inherit}
+section{position:relative}
 
-/* HEADER */
+/* ===== LOADER ===== */
+#loader{
+  position:fixed;inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  flex-direction:column;
+}
+#loader h1{
+  color:#2ecc71;
+  font-size:48px;
+  margin-bottom:10px;
+  letter-spacing:2px;
+  animation:logoPop 1.5s ease forwards;
+}
+#loader p{
+  color:#ccc;
+  font-size:20px;
+  animation:logoPop 1.5s ease 0.5s forwards;
+}
+
+@keyframes logoPop{
+  from{opacity:0; transform:scale(.6)}
+  to{opacity:1; transform:scale(1)}
+}
+
+/* ===== HEADER ===== */
 header{
   position:sticky;top:0;
-  background:rgba(0,0,0,.8);
+  background:rgba(0,0,0,.85);
   padding:18px 30px;
   display:flex;
   justify-content:space-between;
+  z-index:1000;
+  transform:translateY(-60px);
+  opacity:0;
+  animation:headerDrop 1s ease forwards;
+  animation-delay:2s;
 }
-nav a{color:#fff;margin-left:20px;text-decoration:none}
+nav a{color:#fff;margin-left:20px;font-weight:600;transition:.3s}
+nav a:hover{color:#2ecc71}
 
-/* HERO */
+@keyframes headerDrop{
+  from{opacity:0; transform:translateY(-60px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* ===== HERO ===== */
 .hero{
   height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   text-align:center;
-  background:
-  linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.9)),
-  url("https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg")
-  center/cover no-repeat;
+  overflow:hidden;
+  perspective:1200px;
+}
+.hero video{
+  position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;
+  filter:brightness(0.5);
+}
+.hero-inner{
+  transform-style:preserve-3d;
+}
+.hero h1{
+  font-size:48px;
+  margin-bottom:15px;
+  color:#fff;
+  opacity:0;
+  transform:translateZ(-200px) scale(.8);
+  animation:heroTitle 1.5s ease forwards;
+  animation-delay:2.5s;
+  text-shadow:0 20px 40px rgba(0,0,0,.8);
+}
+.hero p{
+  color:#ccc;
+  font-size:22px;
+  margin-bottom:30px;
+  opacity:0;
+  transform:translateY(30px);
+  animation:heroText 1.5s ease forwards;
+  animation-delay:3s;
 }
 .hero a{
   display:inline-block;
-  margin-top:25px;
-  padding:15px 35px;
+  padding:16px 40px;
+  border-radius:50px;
   background:#2ecc71;
   color:#000;
-  border-radius:40px;
-  text-decoration:none;
   font-weight:bold;
+  box-shadow:0 20px 40px rgba(0,0,0,.7);
+  opacity:0;
+  transform:translateY(40px);
+  animation:heroBtn 1.5s ease forwards;
+  animation-delay:3.5s;
 }
 
-/* SECTION */
-.section{max-width:1200px;margin:auto;padding:80px 20px}
+@keyframes heroTitle{
+  from{opacity:0; transform:translateZ(-200px) scale(.8)}
+  to{opacity:1; transform:translateZ(0) scale(1)}
+}
+@keyframes heroText{
+  from{opacity:0; transform:translateY(30px)}
+  to{opacity:1; transform:translateY(0)}
+}
+@keyframes heroBtn{
+  from{opacity:0; transform:translateY(40px)}
+  to{opacity:1; transform:translateY(0)}
+}
 
-/* GALLERY */
+/* ===== SECTION ===== */
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+  opacity:0;
+  transform:translateY(60px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+
+/* ===== GALLERY ===== */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:25px;
+  perspective:1200px;
 }
 .gallery img{
   width:100%;
@@ -57,21 +147,25 @@ nav a{color:#fff;margin-left:20px;text-decoration:none}
   object-fit:cover;
   border-radius:15px;
   cursor:pointer;
+  transition:transform .4s ease, box-shadow .4s ease;
+}
+.gallery img:hover{
+  transform:scale(1.08) rotateX(6deg) rotateY(-6deg);
+  box-shadow:0 30px 70px rgba(0,0,0,.9);
 }
 
-/* LIGHTBOX */
+/* ===== LIGHTBOX ===== */
 .lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.95);
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:3000;
+  z-index:5000;
 }
-.lightbox img{max-width:90%;max-height:90%}
+.lightbox img{max-width:90%;max-height:90%;}
 
-/* WHATSAPP */
+/* ===== WHATSAPP ===== */
 .whatsapp{
   position:fixed;
   right:25px;
@@ -87,23 +181,37 @@ nav a{color:#fff;margin-left:20px;text-decoration:none}
   color:#fff;
   text-decoration:none;
   z-index:4000;
+  transition:.3s;
 }
+.whatsapp:hover{transform:scale(1.1)}
+
+/* ===== SCROLL ANİMASYONU ===== */
+html{scroll-behavior:smooth}
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+  <h1>ÖZ ADALI HURDACILIK</h1>
+  <p>Kuşadası / Aydın</p>
+</div>
+
 <header>
   <strong>Öz Adalı Hurdacılık</strong>
   <nav>
     <a href="#about">Hakkımızda</a>
-    <a href="islerimiz.html">Yaptığımız İşler</a>
     <a href="#gallery">Galeri</a>
+    <a href="#contact">İletişim</a>
   </nav>
 </header>
 
 <section class="hero">
-  <div>
+  <video autoplay muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner">
     <h1>Aydın Kuşadası Öz Adalı Hurdacılık</h1>
     <p>Her türlü hurdanız alınır • Kesim & Söküm</p>
     <a href="tel:05366850647">📞 Hemen Ara</a>
@@ -131,18 +239,48 @@ nav a{color:#fff;margin-left:20px;text-decoration:none}
 </div>
 
 <!-- WHATSAPP -->
-<a class="whatsapp"
-href="https://wa.me/905366850647?text=Merhaba%20hurda%20satmak%20istiyorum"
-target="_blank">💬</a>
+<a class="whatsapp" href="https://wa.me/905366850647?text=Merhaba%20hurda%20satmak%20istiyorum" target="_blank">💬</a>
 
 <script>
+/* ===== YÜKLENİYOR ANİMASYONU ===== */
+window.addEventListener("load", ()=>{
+  const loader = document.getElementById("loader");
+  loader.style.opacity="0";
+  setTimeout(()=>loader.style.display="none",800);
+  document.body.style.opacity="1";
+
+  // Scroll animasyon
+  const sections = document.querySelectorAll(".section");
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.style.opacity="1";
+        entry.target.style.transform="translateY(0)";
+      }
+    });
+  },{threshold:0.2});
+  sections.forEach(sec=>observer.observe(sec));
+});
+
+/* ===== HERO MOUSE 3D ===== */
+const heroInner = document.querySelector(".hero-inner");
+document.querySelector(".hero").addEventListener("mousemove", e=>{
+  const x = (window.innerWidth/2 - e.clientX)/25;
+  const y = (window.innerHeight/2 - e.clientY)/25;
+  heroInner.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+document.querySelector(".hero").addEventListener("mouseleave", ()=>{
+  heroInner.style.transform = "rotateY(0) rotateX(0)";
+});
+
+/* ===== GALLERY LIGHTBOX ===== */
 const lb=document.getElementById("lightbox");
 const lbImg=document.getElementById("lightbox-img");
 document.querySelectorAll(".gallery img").forEach(img=>{
   img.onclick=()=>{
     lb.style.display="flex";
     lbImg.src=img.src;
-  }
+  };
 });
 </script>
 
