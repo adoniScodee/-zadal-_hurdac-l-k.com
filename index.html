@@ -4,194 +4,186 @@
 <meta charset="UTF-8">
 <title>Öz Adalı Hurdacılık | Kuşadası Aydın</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Aydın Kuşadası Öz Adalı Hurdacılık - Her türlü hurdanız alınır. Kesim ve söküm işleri yapılır.">
 
 <style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:'Segoe UI',Arial,sans-serif;
 }
 
 body{
-  background:#0c0c0c;
+  background:#000;
   color:#fff;
+  overflow-x:hidden;
+}
+
+/* LOADER */
+#loader{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:5000;
+  animation:fadeOut 1s ease forwards;
+  animation-delay:2.5s;
+}
+
+.loader-content{
+  text-align:center;
+  animation:zoomIn 2s ease;
+}
+
+.loader-content h1{
+  font-size:38px;
+  margin-top:20px;
+  letter-spacing:2px;
+}
+
+@keyframes zoomIn{
+  from{opacity:0; transform:scale(.6)}
+  to{opacity:1; transform:scale(1)}
+}
+
+@keyframes fadeOut{
+  to{opacity:0; visibility:hidden}
 }
 
 /* HEADER */
 header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 25px;
-  background:#000;
   position:sticky;
   top:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:space-between;
+  padding:18px 30px;
   z-index:1000;
 }
 
 nav a{
   color:#fff;
-  text-decoration:none;
   margin-left:20px;
-  font-weight:bold;
+  text-decoration:none;
+  font-weight:600;
 }
-
-nav a:hover{color:#2ecc71}
 
 /* HERO */
 .hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
-  padding:120px 20px;
   background:
-    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.85)),
     url("https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg")
-    no-repeat center/contain;
+    no-repeat center/cover;
+  perspective:1200px;
 }
 
-/* LOGO */
-.hero-logo{
-  max-width:260px;
-  margin:0 auto 25px;
+.hero-inner{
+  transform-style:preserve-3d;
+  transition:.1s;
 }
 
-.hero-logo img{
-  width:100%;
-}
-
-/* HERO TEXT */
 .hero h1{
-  font-size:34px;
-  margin-bottom:10px;
+  font-size:42px;
+  margin-bottom:12px;
+  text-shadow:0 20px 40px rgba(0,0,0,.8);
 }
 
 .hero p{
-  font-size:18px;
   color:#ccc;
   margin-bottom:30px;
 }
 
-/* HERO BUTTONS */
-.hero-buttons a{
+.hero a{
   display:inline-block;
-  margin:10px;
-  padding:14px 28px;
-  border-radius:40px;
-  font-weight:bold;
+  padding:16px 36px;
+  border-radius:50px;
+  background:linear-gradient(135deg,#2ecc71,#27ae60);
+  color:#000;
   text-decoration:none;
-}
-
-.btn-call{
-  background:#2ecc71;
-  color:#000;
-}
-
-.btn-whatsapp{
-  background:#25D366;
-  color:#000;
+  font-weight:bold;
+  box-shadow:0 20px 40px rgba(0,0,0,.7);
 }
 
 /* SECTIONS */
 .section{
   max-width:1200px;
   margin:auto;
-  padding:60px 20px;
+  padding:80px 20px;
 }
 
-.section h2{
-  border-left:5px solid #2ecc71;
-  padding-left:10px;
-  margin-bottom:20px;
+.glass{
+  background:rgba(255,255,255,.05);
+  border-radius:20px;
+  padding:40px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 30px 60px rgba(0,0,0,.8);
 }
 
 /* GALLERY */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:25px;
-  max-width:900px;
-  margin:auto;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  perspective:1200px;
 }
 
 .gallery img{
   width:100%;
   height:260px;
   object-fit:cover;
-  border-radius:14px;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.gallery img:hover{
-  transform:scale(1.05);
+  border-radius:18px;
+  transition:.15s;
+  box-shadow:0 30px 60px rgba(0,0,0,.7);
 }
 
 /* LIGHTBOX */
 .lightbox{
   position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   background:rgba(0,0,0,.9);
   display:none;
   justify-content:center;
   align-items:center;
-  z-index:2000;
+  z-index:3000;
 }
 
 .lightbox img{
   max-width:90%;
   max-height:90%;
-  border-radius:10px;
-}
-
-.lightbox:active{
-  display:none;
-}
-
-/* MAP */
-iframe{
-  width:100%;
-  height:320px;
-  border:0;
-  border-radius:12px;
-}
-
-/* WHATSAPP FLOAT */
-.whatsapp-float{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#25D366;
-  color:#000;
-  padding:15px 22px;
-  border-radius:50px;
-  font-weight:bold;
-  text-decoration:none;
 }
 
 /* FOOTER */
 footer{
   background:#000;
   text-align:center;
-  padding:20px;
-  font-size:14px;
+  padding:25px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .gallery{
-    grid-template-columns:1fr;
-  }
-  .hero h1{
-    font-size:26px;
-  }
+  .hero h1{font-size:28px}
 }
 </style>
 </head>
 
 <body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-content">
+    <h1>ÖZ ADALI HURDACILIK</h1>
+    <p>Kuşadası / Aydın</p>
+  </div>
+</div>
 
 <header>
   <strong>Öz Adalı Hurdacılık</strong>
@@ -202,62 +194,66 @@ footer{
   </nav>
 </header>
 
-<section class="hero">
-
-  
-
-  <h1>Aydın Kuşadası Öz Adalı Hurdacılık</h1>
-  <p>Her türlü hurdanız alınır<br>Kesim & söküm işleri itina ile yapılır</p>
-
-  <div class="hero-buttons">
-    <a class="btn-call" href="tel:05366850647">📞 Hemen Ara</a>
-    <a class="btn-whatsapp" href="https://wa.me/905366850647" target="_blank">💬 WhatsApp</a>
+<section class="hero" id="hero">
+  <div class="hero-inner" id="heroInner">
+    <h1>Aydın Kuşadası Öz Adalı Hurdacılık</h1>
+    <p>Her türlü hurdanız alınır • Kesim & Söküm</p>
+    <a href="tel:05366850647">📞 Hemen Ara</a>
   </div>
-
 </section>
 
 <section id="about" class="section">
-  <h2>Hakkımızda</h2>
-  <p>
-    Öz Adalı Hurdacılık olarak Kuşadası ve çevresinde
-    yıllardır güvenilir ve hızlı hurdacılık hizmeti sunuyoruz.
-    Her türlü metal hurdası alımı ve söküm işleri profesyonelce yapılır.
-  </p>
+  <div class="glass">
+    <h2>Hakkımızda</h2>
+    <p>Kuşadası ve çevresinde profesyonel hurdacılık hizmeti.</p>
+  </div>
 </section>
 
 <section id="gallery" class="section">
   <h2>Fotoğraf Galerisi</h2>
   <div class="gallery">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg" onclick="openLightbox(this.src)">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg" onclick="openLightbox(this.src)">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg">
   </div>
 </section>
 
-<section id="contact" class="section">
-  <h2>İletişim</h2>
-  <p>📞 <strong>0 536 685 06 47</strong></p>
-  <iframe src="https://www.google.com/maps?q=Değirmendere%20Mah.%20Sanayi%20Cad.%2020%20Sk.%20No:3%20Kuşadası%20Aydın&output=embed"></iframe>
-</section>
-
-<a class="whatsapp-float" href="https://wa.me/905366850647" target="_blank">
-  WhatsApp
-</a>
-
 <footer>
-  📍 Değirmendere Mah. Sanayi Cad. 20 Sk. No:3 Kuşadası / Aydın<br>
-  <small>Drakos Software</small>
+  © Öz Adalı Hurdacılık
 </footer>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
   <img id="lightbox-img">
 </div>
 
 <script>
-function openLightbox(src){
-  document.getElementById("lightbox-img").src = src;
-  document.getElementById("lightbox").style.display = "flex";
-}
+/* HERO 3D MOUSE */
+const hero = document.getElementById("hero");
+const inner = document.getElementById("heroInner");
+
+hero.addEventListener("mousemove", e=>{
+  const x = (window.innerWidth/2 - e.clientX)/25;
+  const y = (window.innerHeight/2 - e.clientY)/25;
+  inner.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+
+hero.addEventListener("mouseleave", ()=>{
+  inner.style.transform = "rotateY(0) rotateX(0)";
+});
+
+/* GALLERY 3D */
+document.querySelectorAll(".gallery img").forEach(img=>{
+  img.addEventListener("mousemove", e=>{
+    const rect = img.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const rx = -(y - rect.height/2)/20;
+    const ry = (x - rect.width/2)/20;
+    img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.08)`;
+  });
+  img.addEventListener("mouseleave", ()=>{
+    img.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+});
 </script>
 
 </body>
