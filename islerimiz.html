@@ -2,64 +2,195 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Yaptığımız İşler | Öz Adalı Hurdacılık</title>
+<title>İşlerimiz | Öz Adalı Hurdacılık</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="description" content="Öz Adalı Hurdacılık'ın yaptığı işler ve hurda alımı fotoğrafları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
-body{margin:0;background:#000;color:#fff;font-family:Arial}
-a{color:#2ecc71;text-decoration:none}
-.section{max-width:1200px;margin:auto;padding:60px 20px}
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-}
-.gallery img{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  border-radius:15px;
-  cursor:pointer;
-}
-.lightbox{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.9);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
-.lightbox img{max-width:90%;max-height:90%}
+  /* Aynı stil sheet'i kopyala (index.html'den), sadece hero'yu kaldır */
+  :root {
+    --primary: #00c853;
+    --dark: #0a0a0a;
+    --light: #f5f5f5;
+    --gray: #888;
+    --metal: #b0bec5;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--dark);
+    color: var(--light);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+    position: relative;
+  }
+  #three-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    opacity: 0.3;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* Header, Footer, Gallery, Whatsapp aynı */
+  /* (index.html'den kopyala: header, footer, .gallery, .whatsapp-float, @media) */
+
+  section { padding: 140px 5%; max-width: 1400px; margin: auto; }
+  h2 {
+    font-size: 3.8rem;
+    text-align: center;
+    margin-bottom: 80px;
+    background: linear-gradient(90deg, #fff, var(--primary), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 32px;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .gallery-item:hover img { transform: scale(1.14); }
 </style>
 </head>
-
 <body>
+<canvas id="three-canvas"></canvas>
 
-<div class="section">
-  <a href="index.html">← Ana Sayfa</a>
-  <h1>Yaptığımız İşler</h1>
-  <p>Kesim • Söküm • Hurda Alımı</p>
+<header id="header">
+  <a href="index.html" class="logo">Öz Adalı Hurdacılık</a>
+  <nav>
+    <a href="index.html#hakkimizda">Hakkımızda</a>
+    <a href="index.html#galeri">Galeri</a>
+    <a href="islerimiz.html">İşlerimiz</a>
+    <a href="tel:05366850647">İletişim</a>
+  </nav>
+</header>
 
+<section id="islerimiz">
+  <h2>İşlerimiz</h2>
+  <p style="font-size:1.4rem; max-width:880px; margin:auto 0 60px; text-align:center; color:#ccc;">
+    Yaptığımız hurda alımı, kesim ve söküm işlerinden örnek fotoğraflar. Daha fazla eklemek için galeriye yeni item'lar ekleyebilirsiniz.
+  </p>
   <div class="gallery">
-    <img src="FOTO1.jpg">
-    <img src="FOTO2.jpg">
-    <img src="FOTO3.jpg">
+    <div class="gallery-item"><img src="https://www.colakoglu.com.tr/uploads/image/275cb540161557ced38bef988aa4b1bb-1722255974628.jpg" alt="Hurda Alımı 1"></div>
+    <div class="gallery-item"><img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iJLz9xT1aUxo/v1/1200x799.jpg" alt="Hurda Alımı 2"></div>
+    <div class="gallery-item"><img src="https://thumbs.dreamstime.com/b/scrap-metal-yard-19889695.jpg" alt="Hurda Alımı 3"></div>
+    <div class="gallery-item"><img src="https://imgs.mongabay.com/wp-content/uploads/sites/20/2024/12/17152224/edit-Worker-fishing-at-the-EU-approved-Anadolu-yard-with-the-1974-built-Diamond-XI-in-the-background.jpg" alt="Hurda Alımı 4"></div>
+    <div class="gallery-item"><img src="https://imgs.mongabay.com/wp-content/uploads/sites/20/2024/12/17152212/edit-Undefined-tube_-at-Aliaga_s-yards.jpg" alt="Hurda Alımı 5"></div>
+    <div class="gallery-item"><img src="https://imgs.mongabay.com/wp-content/uploads/sites/20/2024/12/17151957/edit-Yardwork-2.jpg" alt="Hurda Alımı 6"></div>
+    <div class="gallery-item"><img src="https://www.shutterstock.com/image-photo/metal-scrapyard-storing-before-taking-260nw-2526379297.jpg" alt="Hurda Alımı 7"></div>
+    <div class="gallery-item"><img src="https://media.istockphoto.com/id/2149815761/photo/clow-crane-picking-up-scrap-metal-at-recycling-center-for-metal-aluminum-brass-copper.jpg?s=612x612&w=0&k=20&c=MBlRQyeWynO-JXkYEm3xIWBKyxQLA4JOEqIeQpZyjac=" alt="Hurda Alımı 8"></div>
+    <div class="gallery-item"><img src="https://www.shutterstock.com/image-photo/stack-damaged-vehicles-scrap-metal-260nw-2600300177.jpg" alt="Hurda Alımı 9"></div>
+    <div class="gallery-item"><img src="https://www.ife-bulk.com/fileadmin/_processed_/9/5/csm_Metall_Recyclinghof_9d0c9c2e89.jpg" alt="Hurda Alımı 10"></div>
+    <div class="gallery-item"><img src="https://thumbs.dreamstime.com/b/scrap-metal-yard-industrial-decay-waste-recycling-junkyard-metalwork-industry-pollution-garbage-dump-rusty-iron-steel-shows-piles-419627393.jpg" alt="Hurda Alımı 11"></div>
+    <div class="gallery-item"><img src="https://t3.ftcdn.net/jpg/03/88/51/56/360_F_388515677_2c1bNIGitAczoNeCfGvNhe9cWa5s54jy.jpg" alt="Hurda Alımı 12"></div>
+    <div class="gallery-item"><img src="https://www.shutterstock.com/image-photo/excavator-loading-scrap-metal-onto-260nw-2696591115.jpg" alt="Hurda Alımı 13"></div>
+    <div class="gallery-item"><img src="https://media.istockphoto.com/id/1213452891/photo/scrap-metal-recycling-facility.jpg?s=612x612&w=0&k=20&c=LIl8xfQwkErUegLcIqaSevQZHU-WR8AVRhiKJEXIh1I=" alt="Hurda Alımı 14"></div>
+    <div class="gallery-item"><img src="https://www.burkasan.com/wp-content/uploads/2025/06/padlocks-metal-against-blue-sky.webp" alt="Hurda Alımı 15"></div>
+    <div class="gallery-item"><img src="https://t3.ftcdn.net/jpg/16/44/09/36/360_F_1644093634_yeIIT9trJ8e1N27Ko41978aTByzt6YtH.jpg" alt="Hurda Alımı 16"></div>
+    <div class="gallery-item"><img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F7f109316-4a69-4432-b4ce-45de95f40930.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1" alt="Hurda Alımı 17"></div>
+    <div class="gallery-item"><img src="https://www.shutterstock.com/image-photo/metal-rolling-pile-scrap-near-260nw-2687782361.jpg" alt="Hurda Alımı 18"></div>
+    <div class="gallery-item"><img src="https://media.baumpub.com/files/slides/locale_image/full/0250/62365_en_dc942_64404_mercato-metalli-global-trading-platform.png" alt="Hurda Alımı 19"></div>
+    <div class="gallery-item"><img src="https://t4.ftcdn.net/jpg/15/75/11/95/360_F_1575119598_Hfv5uozTHd2EtJSTE4kGnNnZCsXA0RPN.jpg" alt="Hurda Alımı 20"></div>
+    <div class="gallery-item"><img src="https://www.steelmarketupdate.com/wp-content/uploads/sites/2/2024/10/Mix-Yard-3-1.png" alt="Hurda Alımı 21"></div>
+    <div class="gallery-item"><img src="https://t3.ftcdn.net/jpg/17/49/89/46/360_F_1749894624_rvpafBtQh5SLGSnlOX3EAWJqbMzKbDyr.jpg" alt="Hurda Alımı 22"></div>
+    <div class="gallery-item"><img src="https://t4.ftcdn.net/jpg/07/29/62/51/360_F_729625122_y6tAtOPKnHkv9HGTZzh1yhIWfcOfLAJQ.jpg" alt="Hurda Alımı 23"></div>
+    <div class="gallery-item"><img src="https://i-invdn-com.akamaized.net/trkd-images/LYNXMPEG911NQ_L.jpg" alt="Hurda Alımı 24"></div>
+    <div class="gallery-item"><img src="https://www.amcsgroup.com/media/wwidfc2k/scrap-metal.jpg?rxy=0.48370927318295737,0.8327067669172933&width=1200&height=627&quality=80&v=1db1a6e4223d190" alt="Hurda Alımı 25"></div>
+    <div class="gallery-item"><img src="https://media.baumpub.com/files/slides/locale_image/full/0248/61980_en_de571_64070_mm-dpp-cover-image-weinstein.png" alt="Hurda Alımı 26"></div>
+    <div class="gallery-item"><img src="https://live.cdn.cms.sms-group.com/_processed_/7/5/csm_N-SMS1609-031_Schrottplatz_5e59381176.webp" alt="Hurda Alımı 27"></div>
+    <div class="gallery-item"><img src="https://media.istockphoto.com/id/1494891701/photo/gaddani-ship-breaking-yard-a-bittersweet-farewell-to-maritime-legends-where-echoes-of-the-sea.jpg?s=612x612&w=0&k=20&c=12UAiVECy5emvKJoZ_3NMdzyIqNLa20axa9DccGAmVc=" alt="Hurda Alımı 28"></div>
+    <div class="gallery-item"><img src="https://www.shutterstock.com/image-photo/mobile-lifting-crane-handling-scrap-260nw-2701155121.jpg" alt="Hurda Alımı 29"></div>
+    <div class="gallery-item"><img src="https://c8.alamy.com/comp/A51PA4/scrapyard-and-waste-metal-processing-and-recycling-plant-in-swindon-A51PA4.jpg" alt="Hurda Alımı 30"></div>
+    <!-- Buraya 10-20 daha ekleyebilirsin, aynı formatta -->
   </div>
-</div>
+</section>
 
-<div class="lightbox" id="lb" onclick="this.style.display='none'">
-  <img id="lbimg">
-</div>
+<footer>
+  © 2026 Öz Adalı Hurdacılık • Tüm hakları saklıdır.<br>
+  <a href="https://adoniscodee.github.io/drakosyazlm/" class="drakos">Designed & Developed by Drakos Software</a>
+</footer>
+
+<a href="https://wa.me/905366850647?text=Merhaba%2C%20hurda%20satmak%20istiyorum%2C%20bilgi%20alabilir%20miyim%3F" class="whatsapp-float" target="_blank">💬</a>
 
 <script>
-const lb=document.getElementById("lb");
-const lbimg=document.getElementById("lbimg");
-document.querySelectorAll(".gallery img").forEach(img=>{
-  img.onclick=()=>{
-    lb.style.display="flex";
-    lbimg.src=img.src;
-  }
+// Three.js 3D arka plan (aynı index.html'den)
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const particles = new THREE.BufferGeometry();
+const particleCount = 5000;
+const posArray = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount * 3; i++) {
+  posArray[i] = (Math.random() - 0.5) * 10;
+}
+particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+const material = new THREE.PointsMaterial({
+  color: 0x00c853,
+  size: 0.01,
+  blending: THREE.AdditiveBlending,
+  transparent: true
+});
+const particleSystem = new THREE.Points(particles, material);
+scene.add(particleSystem);
+
+camera.position.z = 5;
+
+function animate() {
+  requestAnimationFrame(animate);
+  particleSystem.rotation.y += 0.0005;
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Header scroll
+window.addEventListener("scroll", () => {
+  document.getElementById("header").classList.toggle("scrolled", window.scrollY > 100);
+});
+
+// Scroll animasyon
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll("h2, .gallery-item").forEach(el => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(60px)";
+  el.style.transition = "all 1.2s cubic-bezier(0.16,1,0.3,1)";
+  observer.observe(el);
 });
 </script>
-
 </body>
 </html>
