@@ -1,0 +1,20 @@
+<section id="kusadasi-manzara" style="padding: 80px 5%; text-align: center; background: linear-gradient(to bottom, rgba(10,10,10,0.4), rgba(10,10,10,0.8)); border-radius: 16px; margin: 60px auto; max-width: 1400px;">
+  <h2 style="margin-bottom: 40px;">Kuşadası'nın Güzelliği İçinde Hizmetinizdeyiz</h2>
+  
+  <!-- Burada seçtiğim en iyi manzara görsellerini karusel veya tek büyük görsel olarak koyuyoruz -->
+  <div style="position: relative; max-width: 1100px; margin: auto; overflow: hidden; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,200,83,0.25);">
+    <img 
+      src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/5e/76/da/pigeon-island.jpg?w=1200" 
+      alt="Kuşadası Güvercinada Muhteşem Manzara - Öz Adalı Hurdacılık Hizmet Bölgesi" 
+      style="width: 100%; height: auto; display: block; filter: brightness(0.9) contrast(1.1);"
+    >
+    <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.65); padding: 18px 36px; border-radius: 50px; font-size: 1.5rem; font-weight: 700; color: var(--primary); text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+      Kuşadası'nda hurdanız değerinde alınır!
+    </div>
+  </div>
+
+  <p style="font-size: 1.5rem; color: #ccc; max-width: 900px; margin: 40px auto 0; line-height: 1.7;">
+    Kuşadası'nın eşsiz deniz, kale ve doğa güzellikleri arasında, biz de profesyonel ekibimizle yanınızdayız.<br>
+    <strong>Her türlü hurdanızı en yüksek fiyattan, nakit olarak satın alıyoruz.</strong> Kaliteli hizmet, güven ve yerel değerlerimizle fark yaratıyoruz.
+  </p>
+</section>
