@@ -7,8 +7,17 @@
 <meta name="description" content="Aydın Kuşadası Öz Adalı Hurdacılık - Her türlü hurdanız alınır. Kesim ve söküm işleri yapılır.">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#0c0c0c;color:#fff}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#0c0c0c;
+  color:#fff;
+}
 
 /* HEADER */
 header{
@@ -19,25 +28,69 @@ header{
   background:#000;
   position:sticky;
   top:0;
+  z-index:1000;
 }
+
 nav a{
   color:#fff;
   text-decoration:none;
   margin-left:20px;
   font-weight:bold;
 }
+
 nav a:hover{color:#2ecc71}
 
 /* HERO */
 .hero{
   text-align:center;
-  padding:90px 20px;
-  background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
-  url("https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg")
-  center/cover;
+  padding:120px 20px;
+  background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url("https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg")
+    no-repeat center/contain;
 }
-.hero h1{font-size:36px;margin-bottom:10px}
-.hero p{font-size:18px;color:#ccc}
+
+/* LOGO */
+.hero-logo{
+  max-width:260px;
+  margin:0 auto 25px;
+}
+
+.hero-logo img{
+  width:100%;
+}
+
+/* HERO TEXT */
+.hero h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:18px;
+  color:#ccc;
+  margin-bottom:30px;
+}
+
+/* HERO BUTTONS */
+.hero-buttons a{
+  display:inline-block;
+  margin:10px;
+  padding:14px 28px;
+  border-radius:40px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.btn-call{
+  background:#2ecc71;
+  color:#000;
+}
+
+.btn-whatsapp{
+  background:#25D366;
+  color:#000;
+}
 
 /* SECTIONS */
 .section{
@@ -45,6 +98,7 @@ nav a:hover{color:#2ecc71}
   margin:auto;
   padding:60px 20px;
 }
+
 .section h2{
   border-left:5px solid #2ecc71;
   padding-left:10px;
@@ -54,17 +108,47 @@ nav a:hover{color:#2ecc71}
 /* GALLERY */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(2,1fr);
+  gap:25px;
+  max-width:900px;
+  margin:auto;
 }
+
 .gallery img{
   width:100%;
-  height:230px;
+  height:260px;
   object-fit:cover;
-  border-radius:12px;
+  border-radius:14px;
+  cursor:pointer;
   transition:.3s;
 }
-.gallery img:hover{transform:scale(1.05)}
+
+.gallery img:hover{
+  transform:scale(1.05);
+}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
+}
+
+.lightbox:active{
+  display:none;
+}
 
 /* MAP */
 iframe{
@@ -74,25 +158,35 @@ iframe{
   border-radius:12px;
 }
 
-/* WHATSAPP */
-.whatsapp{
+/* WHATSAPP FLOAT */
+.whatsapp-float{
   position:fixed;
   right:20px;
   bottom:20px;
   background:#25D366;
-  color:#fff;
+  color:#000;
   padding:15px 22px;
   border-radius:50px;
-  text-decoration:none;
   font-weight:bold;
+  text-decoration:none;
 }
 
 /* FOOTER */
 footer{
-  text-align:center;
   background:#000;
+  text-align:center;
   padding:20px;
   font-size:14px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .gallery{
+    grid-template-columns:1fr;
+  }
+  .hero h1{
+    font-size:26px;
+  }
 }
 </style>
 </head>
@@ -109,8 +203,19 @@ footer{
 </header>
 
 <section class="hero">
+
+  <div class="hero-logo">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/ozadali-logo.png" alt="Öz Adalı Hurdacılık Logo">
+  </div>
+
   <h1>Aydın Kuşadası Öz Adalı Hurdacılık</h1>
   <p>Her türlü hurdanız alınır<br>Kesim & söküm işleri itina ile yapılır</p>
+
+  <div class="hero-buttons">
+    <a class="btn-call" href="tel:05366850647">📞 Hemen Ara</a>
+    <a class="btn-whatsapp" href="https://wa.me/905366850647" target="_blank">💬 WhatsApp</a>
+  </div>
+
 </section>
 
 <section id="about" class="section">
@@ -125,10 +230,8 @@ footer{
 <section id="gallery" class="section">
   <h2>Fotoğraf Galerisi</h2>
   <div class="gallery">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/IMG-20250324-WA0003.jpg">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/IMG-20250428-WA0013.jpg">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg">
-    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-08%20at%2020.16.18.jpeg" onclick="openLightbox(this.src)">
+    <img src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/WhatsApp%20Image%202026-01-09%20at%2001.02.56.jpeg" onclick="openLightbox(this.src)">
   </div>
 </section>
 
@@ -138,7 +241,7 @@ footer{
   <iframe src="https://www.google.com/maps?q=Değirmendere%20Mah.%20Sanayi%20Cad.%2020%20Sk.%20No:3%20Kuşadası%20Aydın&output=embed"></iframe>
 </section>
 
-<a class="whatsapp" href="https://wa.me/905366850647" target="_blank">
+<a class="whatsapp-float" href="https://wa.me/905366850647" target="_blank">
   WhatsApp
 </a>
 
@@ -146,6 +249,18 @@ footer{
   📍 Değirmendere Mah. Sanayi Cad. 20 Sk. No:3 Kuşadası / Aydın<br>
   <small>Drakos Software</small>
 </footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function openLightbox(src){
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox").style.display = "flex";
+}
+</script>
 
 </body>
 </html>
