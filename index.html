@@ -244,7 +244,6 @@
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline>
     <source src="https://raw.githubusercontent.com/adoniScodee/-zadal-_hurdac-l-k.com/main/video.mp4" type="video/mp4">
-    <!-- Alternatif: https://assets.mixkit.co/videos/preview/mixkit-heavy-machinery-moving-scrap-metal-141-large.mp4 -->
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -278,7 +277,9 @@
 <a href="https://wa.me/905366850647?text=Merhaba%2C%20hurda%20satmak%20istiyorum%2C%20bilgi%20alabilir%20miyim%3F" class="whatsapp-float" target="_blank">💬</a>
 
 <script>
-// 3D Arka Plan (Three.js ile hareketli metal parçacıkları)
+// =========================
+// 3D Arka Plan (Three.js)
+// =========================
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
@@ -288,17 +289,10 @@ document.body.appendChild(renderer.domElement);
 const particles = new THREE.BufferGeometry();
 const particleCount = 5000;
 const posArray = new Float32Array(particleCount * 3);
-for (let i = 0; i < particleCount * 3; i++) {
-  posArray[i] = (Math.random() - 0.5) * 10;
-}
+for (let i = 0; i < particleCount * 3; i++) posArray[i] = (Math.random() - 0.5) * 10;
 particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-const material = new THREE.PointsMaterial({
-  color: 0x00c853,
-  size: 0.01,
-  blending: THREE.AdditiveBlending,
-  transparent: true
-});
+const material = new THREE.PointsMaterial({ color: 0x00c853, size: 0.01, blending: THREE.AdditiveBlending, transparent: true });
 const particleSystem = new THREE.Points(particles, material);
 scene.add(particleSystem);
 
@@ -355,6 +349,26 @@ document.querySelectorAll("h1, .hero p, .cta-btn, h2, .gallery-item").forEach(el
   el.style.transition = "all 1.2s cubic-bezier(0.16,1,0.3,1)";
   observer.observe(el);
 });
+
+// =========================
+// F12 & DevTools Kilitleme
+// =========================
+document.addEventListener('keydown', function(e) {
+    if (e.key === "F12" || e.keyCode === 123) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "C" || e.key === "J" || e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) e.preventDefault();
+    if (e.ctrlKey && (e.key === "U" || e.keyCode === 85)) e.preventDefault();
+});
+
+document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+(function() {
+    const threshold = 160;
+    setInterval(function() {
+        if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+            alert("⚠️ DevTools açılması engellenmiştir!");
+        }
+    }, 1000);
+})();
 </script>
 </body>
 </html>
